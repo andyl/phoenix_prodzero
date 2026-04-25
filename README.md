@@ -10,7 +10,7 @@ and quick-deploy prototypes.
 Run the installer against a fresh Phoenix project in a single command:
 
 ```
-mix igniter.new myapp --with phx.new --with-args="--no-ecto --no-email" --install phoenix_lite
+mix igniter.new myapp --with phx.new --with-args="--no-ecto --no-mailer" --install phoenix_lite
 ```
 
 Or, against an existing Phoenix project:
