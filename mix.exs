@@ -22,8 +22,8 @@ defmodule PhoenixLite.MixProject do
   defp deps do
     [
       {:git_ops, "~> 2.0", only: [:dev], runtime: false},
-      {:igniter, "~> 0.6"},
-      {:commit_hook, path: "~/src/Tool/commit_hook"}
+      {:igniter, "~> 0.7"},
+      {:commit_hook, path: "/home/aleak/src/Tool/commit_hook", only: [:dev], runtime: false}
     ]
   end
 end
