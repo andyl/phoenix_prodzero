@@ -5,6 +5,15 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## v0.0.6 (2026-04-26)
+
+
+
+
+### Bug Fixes:
+
+* rename phoenix_prodzero to phoenix_prodmin by andyl
+
 ## v0.0.5 (2026-04-26)
 
 
