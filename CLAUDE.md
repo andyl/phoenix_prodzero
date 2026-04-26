@@ -4,14 +4,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project intent
 
-PhoenixProdzero is an Elixir package that codemods a freshly-generated Phoenix project so it can boot in `MIX_ENV=prod` with zero manual edits. Target use cases: internal apps without SSL, Phoenix-as-SSG, quick-deploy prototypes.
+PhoenixProdmin is an Elixir package that codemods a freshly-generated Phoenix project so it can boot in `MIX_ENV=prod` with zero manual edits. Target use cases: internal apps without SSL, Phoenix-as-SSG, quick-deploy prototypes.
 
-The package is currently a skeleton (`lib/phoenix_prodzero.ex` is the default `mix new` stub). The actual implementation has not been written yet — the intended design lives in `_spec/designs/260425_Intro.md` and should be consulted before adding code.
+The package is currently a skeleton (`lib/phoenix_prodmin.ex` is the default `mix new` stub). The actual implementation has not been written yet — the intended design lives in `_spec/designs/260425_Intro.md` and should be consulted before adding code.
 
 The core machinery is meant to be an **Igniter installer**, invoked via:
 
 ```
-mix igniter.new myapp --with phx.new --with-args="--no-ecto --no-email" --install phoenix_prodzero
+mix igniter.new myapp --with phx.new --with-args="--no-ecto --no-email" --install phoenix_prodmin
 ```
 
 …which will replace `config/runtime.exs` in the host project with a templated version (disable SSL, bind `0.0.0.0`, hard-code secret key, etc.). When implementing, prefer Igniter codemods over hand-rolled file manipulation, and keep open the question of templated-replacement vs. sourceror-style in-place editing (see "Questions" in the design doc).
@@ -19,7 +19,7 @@ mix igniter.new myapp --with phx.new --with-args="--no-ecto --no-email" --instal
 ## Common commands
 
 - `mix deps.get` — fetch deps. Note `:commit_hook` is a **local path dep** at `~/src/Tool/commit_hook`; that directory must exist on the developer's machine or `deps.get` fails.
-- `mix test` — run the test suite. Single test: `mix test test/phoenix_prodzero_test.exs:5` (line number).
+- `mix test` — run the test suite. Single test: `mix test test/phoenix_prodmin_test.exs:5` (line number).
 - `mix format` — formatter is configured via `.formatter.exs`.
 - `bin/release` — cuts a release: `mix git_ops.release --yes && git push --follow-tags`.
 

@@ -1,6 +1,6 @@
-# PhoenixProdzero
+# PhoenixProdmin
 
-PhoenixProdzero is an Igniter installer that codemods a freshly-generated Phoenix
+PhoenixProdmin is an Igniter installer that codemods a freshly-generated Phoenix
 project so it can boot under `MIX_ENV=prod` with **zero** manual edits to
 `runtime.exs`. Targeted use cases: internal apps without SSL, Phoenix-as-SSG,
 and quick-deploy prototypes.
@@ -10,13 +10,13 @@ and quick-deploy prototypes.
 Run the installer against a fresh Phoenix project in a single command:
 
 ```
-mix igniter.new myapp --with phx.new --with-args="--no-ecto --no-mailer" --install phoenix_prodzero@gihub:andyl/phoenix_prodzero
+mix igniter.new myapp --with phx.new --with-args="--no-ecto --no-mailer" --install phoenix_prodmin@gihub:andyl/phoenix_prodmin
 ```
 
 Or, against an existing Phoenix project:
 
 ```
-mix igniter.install phoenix_prodzero@github:andyl/phoenix_prodzero
+mix igniter.install phoenix_prodmin@github:andyl/phoenix_prodmin
 ```
 
 ## What the installer does
