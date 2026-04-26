@@ -5,6 +5,17 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## v0.0.5 (2026-04-26)
+
+
+
+
+### Bug Fixes:
+
+* rename phoenix_lite to phoenix_prodzero by andyl
+
+* optional deps by andyl
+
 ## v0.0.4 (2026-04-26)
 
 
