@@ -2,7 +2,7 @@
 
 ## Overview
 
-Provide an Igniter installer for the `phoenix_lite` package that, when run
+Provide an Igniter installer for the `phoenix_prodzero` package that, when run
 against a freshly generated Phoenix project, applies all the codemods needed
 for the project to boot in `MIX_ENV=prod` without any further manual editing.
 
@@ -15,7 +15,7 @@ start it directly in production mode — with no hand-edits to `runtime.exs`,
 
 - Eliminate 100% of the manual editing that is normally required to make a new Phoenix app boot in prod.
 - Make it possible to go from `mix phx.new` to `MIX_ENV=prod mix phx.server` with **zero** intermediate file edits by the developer.
-- Compose cleanly with the standard Igniter workflow so the installer can be invoked as part of `mix igniter.new ... --install phoenix_lite`.
+- Compose cleanly with the standard Igniter workflow so the installer can be invoked as part of `mix igniter.new ... --install phoenix_prodzero`.
 - Preserve a recoverable copy of any file the installer overwrites, so the developer can audit or revert changes.
 
 ### Success criteria
@@ -26,7 +26,7 @@ start it directly in production mode — with no hand-edits to `runtime.exs`,
 
 ## Functional Requirements
 
-- The package exposes an Igniter installer task discoverable as the `--install phoenix_lite` target.
+- The package exposes an Igniter installer task discoverable as the `--install phoenix_prodzero` target.
 - The installer rewrites (or otherwise transforms) `config/runtime.exs` in the host project so that, at minimum:
   - SSL is disabled.
   - The HTTP endpoint binds to host `0.0.0.0`.
@@ -35,7 +35,7 @@ start it directly in production mode — with no hand-edits to `runtime.exs`,
 - Before overwriting `config/runtime.exs`, the installer preserves a backup copy of the original file in a predictable location within the host project.
 - The installer is invocable via the documented end-to-end flow:
   ```
-  mix igniter.new myapp --with phx.new --with-args="--no-ecto --no-email" --install phoenix_lite
+  mix igniter.new myapp --with phx.new --with-args="--no-ecto --no-email" --install phoenix_prodzero
   ```
 - The installer surfaces a clear summary of every change it made (files touched, files backed up).
 
@@ -58,7 +58,7 @@ app.
 
 ## Technical Approach
 
-- **Architecture:** the package's core is an Igniter installer module that registers itself as the entry point for `--install phoenix_lite`.
+- **Architecture:** the package's core is an Igniter installer module that registers itself as the entry point for `--install phoenix_prodzero`.
 - **Codemod strategy:** the design currently leaves open whether the installer should (a) replace `config/runtime.exs` wholesale with a templated file, or (b) edit the existing file in place via Igniter / Sourceror. The implementation should pick one strategy and document the trade-off; the spec does not prescribe which.
 - **Backup mechanism:** when `runtime.exs` is fully replaced, the original is preserved in a backup location in the host project so the change is auditable and reversible.
 - **Components affected:** primarily `config/runtime.exs` of the host project. The need to also modify `config/prod.exs` or other files is an open question (see below).
@@ -75,7 +75,7 @@ app.
 
 ## Acceptance Criteria
 
-- Running `mix igniter.new myapp --with phx.new --with-args="--no-ecto --no-email" --install phoenix_lite` produces a project where `MIX_ENV=prod mix phx.server` succeeds with no further file edits.
+- Running `mix igniter.new myapp --with phx.new --with-args="--no-ecto --no-email" --install phoenix_prodzero` produces a project where `MIX_ENV=prod mix phx.server` succeeds with no further file edits.
 - The installer leaves a backup of any file it replaces in a predictable location.
 - Running the installer twice on the same project does not corrupt it.
 - The installer prints a summary of files modified and files backed up.

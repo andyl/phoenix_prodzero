@@ -1,11 +1,11 @@
-defmodule PhoenixLite.MixProject do
+defmodule PhoenixProdzero.MixProject do
   use Mix.Project
 
   @version "0.0.4"
 
   def project do
     [
-      app: :phoenix_lite,
+      app: :phoenix_prodzero,
       version: @version,
       elixir: "~> 1.19",
       start_permanent: Mix.env() == :prod,

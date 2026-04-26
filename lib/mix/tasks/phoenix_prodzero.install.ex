@@ -1,12 +1,12 @@
-defmodule Mix.Tasks.PhoenixLite.Install.Docs do
+defmodule Mix.Tasks.PhoenixProdzero.Install.Docs do
   @moduledoc false
 
   def short_doc do
-    "Installs phoenix_lite into a Phoenix project."
+    "Installs phoenix_prodzero into a Phoenix project."
   end
 
   def example do
-    "mix igniter.install phoenix_lite"
+    "mix igniter.install phoenix_prodzero"
   end
 
   def long_doc do
@@ -37,7 +37,7 @@ defmodule Mix.Tasks.PhoenixLite.Install.Docs do
 end
 
 if Code.ensure_loaded?(Igniter) do
-  defmodule Mix.Tasks.PhoenixLite.Install do
+  defmodule Mix.Tasks.PhoenixProdzero.Install do
     @shortdoc "#{__MODULE__.Docs.short_doc()}"
 
     @moduledoc __MODULE__.Docs.long_doc()
@@ -51,7 +51,7 @@ if Code.ensure_loaded?(Igniter) do
     @impl Igniter.Mix.Task
     def info(_argv, _composing_task) do
       %Igniter.Mix.Task.Info{
-        group: :phoenix_lite,
+        group: :phoenix_prodzero,
         adds_deps: [],
         installs: [],
         example: __MODULE__.Docs.example(),
@@ -71,12 +71,12 @@ if Code.ensure_loaded?(Igniter) do
       force? = opts[:force]
       backup? = opts[:backup]
 
-      with {:ok, info} <- PhoenixLite.HostProject.inspect(igniter),
+      with {:ok, info} <- PhoenixProdzero.HostProject.inspect(igniter),
            {:ok, igniter, original} <- read_runtime(igniter) do
         cond do
           already_installed?(original) and not force? ->
             Igniter.add_notice(igniter, """
-            phoenix_lite is already installed (sentinel detected in #{@runtime_path}).
+            phoenix_prodzero is already installed (sentinel detected in #{@runtime_path}).
             Pass --force to overwrite.
             """)
 
@@ -117,12 +117,12 @@ if Code.ensure_loaded?(Igniter) do
         {:ok, igniter, content}
       else
         {:error,
-         "phoenix_lite expected #{@runtime_path} to exist. Modern `mix phx.new` always generates it; aborting."}
+         "phoenix_prodzero expected #{@runtime_path} to exist. Modern `mix phx.new` always generates it; aborting."}
       end
     end
 
     defp already_installed?(content) when is_binary(content) do
-      String.contains?(content, PhoenixLite.HostProject.sentinel())
+      String.contains?(content, PhoenixProdzero.HostProject.sentinel())
     end
 
     defp maybe_write_backup(igniter, original) do
@@ -135,7 +135,7 @@ if Code.ensure_loaded?(Igniter) do
 
     defp render_template(%{otp_app: otp_app, endpoint_module: endpoint_module}) do
       secret_key_base = :crypto.strong_rand_bytes(48) |> Base.encode64()
-      path = Application.app_dir(:phoenix_lite, @template_path)
+      path = Application.app_dir(:phoenix_prodzero, @template_path)
 
       EEx.eval_file(path,
         assigns: [
@@ -160,14 +160,14 @@ if Code.ensure_loaded?(Igniter) do
         end
 
       """
-      phoenix_lite installed:
+      phoenix_prodzero installed:
         - wrote #{@runtime_path}
       #{backup_line}
       """
     end
   end
 else
-  defmodule Mix.Tasks.PhoenixLite.Install do
+  defmodule Mix.Tasks.PhoenixProdzero.Install do
     @shortdoc "#{__MODULE__.Docs.short_doc()} | Install `igniter` to use"
 
     @moduledoc __MODULE__.Docs.long_doc()
@@ -176,7 +176,7 @@ else
 
     def run(_argv) do
       Mix.shell().error("""
-      The task 'phoenix_lite.install' requires igniter. Please install igniter and try again.
+      The task 'phoenix_prodzero.install' requires igniter. Please install igniter and try again.
 
       For more information, see: https://hexdocs.pm/igniter/readme.html#installation
       """)
